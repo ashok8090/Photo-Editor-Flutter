@@ -14,8 +14,10 @@ jobs:
         with:
           flutter-version: '3.24.0'
           channel: 'stable'
-      - name: Install dependencies
+      - name: Get dependencies
         run: flutter pub get
+      - name: Ensure Android project structure
+        run: flutter create . --project-name photo_merger_highlighter --platforms=android
       - name: Build APK
         run: flutter build apk --release
       - name: Upload APK
@@ -23,3 +25,4 @@ jobs:
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
